@@ -1,0 +1,1 @@
+console.log("hnlinks - background page loaded");

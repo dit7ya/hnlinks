@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+  "name": "hnlinks",
+  "version": "0.1",
+  "description": "hnlinks description",
+  "content_scripts": [
+    {
+      "matches": [
+
+          "https://developer.mozilla.org/*",
+          "https://news.ycombinator.com/*"
+
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "permissions": [],
+  "icons": {
+    "64": "icon.png"
+  },
+  "browser_action": {
+    "default_title": "hnlinks (browserAction)",
+    "default_icon": {
+      "64": "icon.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  }
+}
