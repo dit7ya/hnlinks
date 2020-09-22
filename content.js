@@ -48,7 +48,7 @@ function createLinksListElement(linksArray) {
     linksDiv.className = "halum";
     linksDiv.style.cssText =
         "position: fixed; top:0; right:0; font-family: sans-serif; font-size: 0.6rem; overflow: auto; background-color: white; width: 350px; height: 200px; \
-   border: 2px solid red; padding: 20px";
+   border: 2px solid #ff6600; padding: 20px";
 
     // and give it some content
     const newContent = document.createTextNode(
@@ -61,6 +61,17 @@ function createLinksListElement(linksArray) {
     for (let i = 0; i < linksArray.length; i++) {
         // TODO REFACTOR THIS ENTIRE BLOCK
         let newP = document.createElement("p");
+
+        const buttonIcon = document.createElement('a');
+        const icon = document.createTextNode("🔴");
+        buttonIcon.appendChild(icon);
+        // icon.appendChild(buttonIcon);
+        // icon.href = 
+        icon.onclick = function() {
+                document.getElementById(parentCommentID).scrollIntoView();
+            };
+
+        newP.appendChild(buttonIcon);
 
         let parentCommentID = linksArray[i]["idOfClosestParent"];
         let buttonEl = document.createElement("button");
@@ -77,7 +88,7 @@ function createLinksListElement(linksArray) {
         a.appendChild(linkText);
         a.title = linksArray[i]["link"];
         a.href = linksArray[i]["link"];
-        a.style.cssText = "vertical-align: bottom";
+        // a.style.cssText = "vertical-align: bottom";
         newP.appendChild(a);
 
         let nextP = document.createElement("p");
