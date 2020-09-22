@@ -24,10 +24,16 @@ function createLinksList() {
         if (checkLink(links[i].href)) {
             try {
                 idOfClosestParent = links[i].closest(".comtr").id;
+                textOfComment = document
+                    .getElementById(idOfClosestParent)
+                    .getElementsByClassName("commtext")[0]
+                    .innerText.slice(0, -7); // slicing to get rid of the 'reply' text
+
                 console.log(idOfClosestParent);
                 linksArray.push({
                     link: links[i].href,
                     idOfClosestParent: idOfClosestParent,
+                    commentText: textOfComment,
                 });
             } catch (err) {} finally {}
         }
@@ -41,7 +47,7 @@ function createLinksListElement(linksArray) {
     const linksDiv = document.createElement("div");
     linksDiv.className = "halum";
     linksDiv.style.cssText =
-        "position: fixed; top:0; right:0; font-family: sans-serif; font-size: 12px; overflow: auto; background-color: white; width: 350px; height: 200px; \
+        "position: fixed; top:0; right:0; font-family: sans-serif; font-size: 0.6rem; overflow: auto; background-color: white; width: 350px; height: 200px; \
    border: 2px solid red; padding: 20px";
 
     // and give it some content
@@ -54,16 +60,15 @@ function createLinksListElement(linksArray) {
 
     for (let i = 0; i < linksArray.length; i++) {
         // TODO REFACTOR THIS ENTIRE BLOCK
-        const newP = document.createElement("p");
+        let newP = document.createElement("p");
 
-        const parentCommentID = linksArray[i]["idOfClosestParent"];
-        const buttonEl = document.createElement("button");
+        let parentCommentID = linksArray[i]["idOfClosestParent"];
+        let buttonEl = document.createElement("button");
         buttonEl.onclick = function() {
             document.getElementById(parentCommentID).scrollIntoView();
         };
-        // buttonEl.style.cssText = "display:inline-block; padding:0.3em 1.2em; margin:0 0.3em 0.3em 0; border-radius:2em; box-sizing: border-box; text-decoration:none; font-family:'Roboto',sans-serif; font-weight:300; color:#FFFFFF; background-color:#4eb5f1;";
-
-        buttonEl.style.cssText = "border: 1px outset blue; border-radius: 9px; background-color: lightBlue; height:1rem; width:0.8rem; cursor:pointer;";
+        buttonEl.style.cssText =
+            "border: 0px outset blue; border-radius: 9px; background-color: #ff6600; height:1rem; width:0.8rem; cursor:pointer;";
 
         newP.appendChild(buttonEl);
 
@@ -72,10 +77,15 @@ function createLinksListElement(linksArray) {
         a.appendChild(linkText);
         a.title = linksArray[i]["link"];
         a.href = linksArray[i]["link"];
-
         a.style.cssText = "vertical-align: bottom";
-
         newP.appendChild(a);
+
+        let nextP = document.createElement("p");
+        // TODO contract the comment to two lines or 100 chars or something.
+
+        let t = document.createTextNode(linksArray[i]["commentText"]);
+        nextP.appendChild(t);
+        newP.appendChild(nextP);
 
         linksDiv.appendChild(newP);
     }
