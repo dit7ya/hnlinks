@@ -7,8 +7,7 @@
     {
       "matches": [
 
-          "https://developer.mozilla.org/*",
-          "https://news.ycombinator.com/*"
+          "https://news.ycombinator.com/item*"
 
       ],
       "js": [

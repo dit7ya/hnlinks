@@ -50,31 +50,35 @@ function createLinksListElement(linksArray) {
     const linksDiv = document.createElement("div");
     linksDiv.className = "halum";
     linksDiv.style.cssText =
-        "position: fixed; top:0; right:0; font-family: sans-serif; font-size: 0.7rem; overflow: auto; background-color: white; width: 27%; height: 100%; \
+        "position: fixed; top:0; right:0; bottom:0; font-family: sans-serif; font-size: 0.7rem; overflow: auto; background-color: white; width: 27%; height: max-content; \
    border: 2px solid #ff6600; margin: 0.5rem; padding: 0.5rem;";
 
     // and give it some content
     const newContent = document.createTextNode(
-        "Enjoy the list of filtered links that appear in this HN thread!"
+        "Click on a comment text to focus on that comment in the thread. "
     );
 
     // add the text node to the newly created div
     linksDiv.appendChild(newContent);
 
+    const hr = document.createElement("hr");
+    hr.style.cssText = "border: 0.5px solid grey";
+    linksDiv.appendChild(hr);
+
     for (let i = 0; i < linksArray.length; i++) {
         // TODO REFACTOR THIS ENTIRE BLOCK
         let newP = document.createElement("p");
 
-        const buttonIcon = document.createElement('h');
-        const icon = document.createTextNode("🔴");
-        buttonIcon.onclick = function() {
-                document.getElementById(parentCommentID).scrollIntoView();
-            };
+        // const buttonIcon = document.createElement('h');
+        // const icon = document.createTextNode("🔴");
+        // buttonIcon.onclick = function() {
+        //         document.getElementById(parentCommentID).scrollIntoView();
+        //     };
 
-        buttonIcon.appendChild(icon);
-        buttonIcon.style.cssText = "cursor:pointer;";
+        // buttonIcon.appendChild(icon);
+        // buttonIcon.style.cssText = "cursor:pointer;";
 
-        newP.appendChild(buttonIcon);
+        // newP.appendChild(buttonIcon);
 
         let parentCommentID = linksArray[i]["idOfClosestParent"];
 
@@ -92,7 +96,9 @@ function createLinksListElement(linksArray) {
         a.appendChild(linkText);
         a.title = linksArray[i]["link"];
         a.href = linksArray[i]["link"];
-        // a.style.cssText = "vertical-align: bottom";
+        a.target = "_blank";
+        a.style.cssText = "font-size: 110%; text-decoration: underline solid black";
+        // a.style.cssText = "font-size: 110%";
         newP.appendChild(a);
 
         let nextP = document.createElement("p");
@@ -100,6 +106,12 @@ function createLinksListElement(linksArray) {
 
         let t = document.createTextNode(linksArray[i]["commentText"]);
         nextP.appendChild(t);
+        nextP.style.cssText = "cursor: pointer;";
+        nextP.onclick = function() {
+            document.getElementById(parentCommentID).scrollIntoView();
+        };
+
+
         newP.appendChild(nextP);
 
         linksDiv.appendChild(newP);
