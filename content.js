@@ -3,6 +3,9 @@ console.log("hnlinks - content script loaded");
 const linksArray = createLinksList();
 createLinksListElement(linksArray);
 
+document.getElementById("hnmain").width = "70%";
+document.getElementById("hnmain").align = "left";
+
 // create a function that extracts all external URLs from the page and displays them along with a button to go to the page location where this link appears
 // and then creates a nice HTML element with all those links
 
@@ -47,8 +50,8 @@ function createLinksListElement(linksArray) {
     const linksDiv = document.createElement("div");
     linksDiv.className = "halum";
     linksDiv.style.cssText =
-        "position: fixed; top:0; right:0; font-family: sans-serif; font-size: 0.6rem; overflow: auto; background-color: white; width: 350px; height: 200px; \
-   border: 2px solid #ff6600; padding: 20px";
+        "position: fixed; top:0; right:0; font-family: sans-serif; font-size: 0.7rem; overflow: auto; background-color: white; width: 27%; height: 100%; \
+   border: 2px solid #ff6600; margin: 0.5rem; padding: 0.5rem;";
 
     // and give it some content
     const newContent = document.createTextNode(
@@ -62,29 +65,30 @@ function createLinksListElement(linksArray) {
         // TODO REFACTOR THIS ENTIRE BLOCK
         let newP = document.createElement("p");
 
-        const buttonIcon = document.createElement('a');
+        const buttonIcon = document.createElement('h');
         const icon = document.createTextNode("🔴");
-        buttonIcon.appendChild(icon);
-        // icon.appendChild(buttonIcon);
-        // icon.href = 
-        icon.onclick = function() {
+        buttonIcon.onclick = function() {
                 document.getElementById(parentCommentID).scrollIntoView();
             };
+
+        buttonIcon.appendChild(icon);
+        buttonIcon.style.cssText = "cursor:pointer;";
 
         newP.appendChild(buttonIcon);
 
         let parentCommentID = linksArray[i]["idOfClosestParent"];
-        let buttonEl = document.createElement("button");
-        buttonEl.onclick = function() {
-            document.getElementById(parentCommentID).scrollIntoView();
-        };
-        buttonEl.style.cssText =
-            "border: 0px outset blue; border-radius: 9px; background-color: #ff6600; height:1rem; width:0.8rem; cursor:pointer;";
 
-        newP.appendChild(buttonEl);
+        // let buttonEl = document.createElement("button");
+        // buttonEl.onclick = function() {
+        //     document.getElementById(parentCommentID).scrollIntoView();
+        // };
+        // buttonEl.style.cssText =
+        //     "border: 0px outset blue; border-radius: 9px; background-color: #ff6600; height:1rem; width:0.8rem; cursor:pointer;";
+
+        // newP.appendChild(buttonEl);
 
         var a = document.createElement("a");
-        var linkText = document.createTextNode(linksArray[i]["link"]);
+        var linkText = document.createTextNode(" ".concat(linksArray[i]["link"]));
         a.appendChild(linkText);
         a.title = linksArray[i]["link"];
         a.href = linksArray[i]["link"];
