@@ -1,4 +1,4 @@
-console.log("hnlinks - content script loaded");
+// console.log("hnlinks - content script loaded");
 
 const linksArray = createLinksList();
 createLinksListElement(linksArray);
@@ -32,7 +32,7 @@ function createLinksList() {
                     .getElementsByClassName("commtext")[0]
                     .innerText.slice(0, -7); // slicing to get rid of the 'reply' text
 
-                console.log(idOfClosestParent);
+                // console.log(idOfClosestParent);
                 linksArray.push({
                     link: links[i].href,
                     idOfClosestParent: idOfClosestParent,
@@ -42,7 +42,7 @@ function createLinksList() {
         }
     }
     linksArray.sort((a, b) => a.link.localeCompare(b.link));
-    console.log(linksArray);
+    // console.log(linksArray);
     return linksArray;
 }
 
