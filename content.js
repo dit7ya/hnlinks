@@ -1,49 +1,36 @@
-const linksArray = createLinksList();
-createLinksListElement(linksArray);
-
 // Setting this here was easier than using the CSS
 document.getElementById("hnmain").width = "70%";
 document.getElementById("hnmain").align = "left";
 
-// create a function that extracts all external URLs from the page and displays them along with a button to go to the page location where this link appears
-// and then creates a nice HTML element with all those links
+const linksArray = createLinksArray();
+createLinksArrayElement(linksArray);
 
-function checkLink(lnk) {
-    // TODO This is not required anymore since we are only looping inside the comments
-    if (
-        !lnk.includes("news.ycombinator.com") &&
-        !lnk.includes("javascript:void") &&
-        !lnk.includes("ycombinator.com")
-    ) {
-        return true;
-    }
-}
-
-function createLinksList() {
+function createLinksArray() {
     let linksArray = [];
-    let links = document.getElementsByTagName("a");
-    for (let i = 0, max = links.length; i < max; i++) {
-        if (checkLink(links[i].href)) {
-            try {
-                idOfClosestParent = links[i].closest(".comtr").id;
-                textOfComment = document
-                    .getElementById(idOfClosestParent)
-                    .getElementsByClassName("commtext")[0]
-                    .innerText.slice(0, -7); // slicing to get rid of the 'reply' text
 
-                linksArray.push({
-                    link: links[i].href,
-                    idOfClosestParent: idOfClosestParent,
-                    commentText: textOfComment,
-                });
-            } catch (err) {} finally {}
-        }
+    // Select all a elements inside commtext classes whose href attribute begins with "https"
+    let links = document.querySelectorAll('.commtext a[href^="https"]');
+
+    for (let i = 0, max = links.length; i < max; i++) {
+
+        idOfClosestParent = links[i].closest(".comtr").id;
+        textOfComment = document
+            .getElementById(idOfClosestParent)
+            .getElementsByClassName("commtext")[0]
+            .innerText.slice(0, -7); // slicing to get rid of the 'reply' text
+
+        linksArray.push({
+            link: links[i].href,
+            idOfClosestParent: idOfClosestParent,
+            commentText: textOfComment,
+        });
     }
+
     linksArray.sort((a, b) => a.link.localeCompare(b.link));
     return linksArray;
 }
 
-function createLinksListElement(linksArray) {
+function createLinksArrayElement(linksArray) {
     const linksDiv = document.createElement("div");
     linksDiv.className = "linksDiv";
 
@@ -57,7 +44,6 @@ function createLinksListElement(linksArray) {
     linksDiv.appendChild(hr);
 
     for (let i = 0; i < linksArray.length; i++) {
-        // TODO REFACTOR THIS ENTIRE BLOCK
         let linkBlock = document.createElement("div");
         let parentCommentID = linksArray[i]["idOfClosestParent"];
 
