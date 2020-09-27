@@ -4,31 +4,29 @@
     "version": "0.1.1",
     "description": "hnlinks description",
     "content_scripts": [{
-        "matches": [
-            "https://news.ycombinator.com/item*"
-        ],
-        "js": [
-            "content.js"
-        ],
-        "css": [
-            "styles.css"
-        ]
-
-
+        "matches": ["https://news.ycombinator.com/item*"],
+        "js": ["content.js"],
+        "css": ["styles.css"]
     }],
     "permissions": [],
     "icons": {
         "64": "icon.png"
     },
     "browser_action": {
-        "default_title": "hnlinks (browserAction)",
+        "default_title": "Toggle visibility of the sidebar",
         "default_icon": {
             "64": "icon.png"
         }
     },
     "background": {
-        "scripts": [
-            "background.js"
-        ]
+        "scripts": ["background.js"]
+    },
+    "commands": {
+        "_execute_browser_action": {
+            "suggested_key": {
+                "default": "Alt+Shift+8"
+            },
+            "description": "Toggle visibility of sidebar."
+        }
     }
 }

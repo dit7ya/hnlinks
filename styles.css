@@ -21,6 +21,7 @@
     font-family: sans-serif;
     font-size: 0.7rem;
     overflow: auto;
+    /* overflow-x: hidden; */
     background-color: white;
     width: 27%;
     height: max-content;

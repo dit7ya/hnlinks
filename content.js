@@ -1,3 +1,25 @@
+browser.runtime.onMessage.addListener(request => {
+    toggle();
+    return Promise.resolve({
+        response: "Msg from content script"
+    });
+});
+
+function toggle() {
+    if (document.getElementById("hnmain").align == "left") {
+
+        document.getElementsByClassName("linksDiv")[0].style.display = "none";
+        document.getElementById("hnmain").width = "85%";
+        document.getElementById("hnmain").align = "center";
+    } else {
+
+        document.getElementsByClassName("linksDiv")[0].style.display = "initial";
+        document.getElementById("hnmain").width = "70%";
+        document.getElementById("hnmain").align = "left";
+    }
+
+}
+
 // Setting this here was easier than using the CSS
 document.getElementById("hnmain").width = "70%";
 document.getElementById("hnmain").align = "left";
@@ -62,7 +84,7 @@ function createLinksArrayElement(linksArray) {
 
         let linkCommentText = document.createTextNode(linksArray[i]["commentText"]);
         linkComment.appendChild(linkCommentText);
-        linkComment.style.cssText = "cursor: pointer;";
+        linkComment.style.cssText = "cursor: pointer;"; // TODO shift this to styles.css
         linkComment.onclick = function() {
             document.getElementById(parentCommentID).scrollIntoView();
         };
