@@ -1,0 +1,30 @@
+
+
+
+/* nextP.style.cssText="cursor: pointer;"; */
+
+
+.linksDiv a {
+    font-size: 110%;
+    text-decoration: underline solid black;
+}
+
+.linksDiv hr {
+    border: 0.5px solid grey;}
+
+
+.linksDiv {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    font-family: sans-serif;
+    font-size: 0.7rem;
+    overflow: auto;
+    background-color: white;
+    width: 27%;
+    height: max-content;
+    border: 2px solid #ff6600;
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
