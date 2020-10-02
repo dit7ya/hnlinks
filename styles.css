@@ -1,8 +1,6 @@
-
-
-
-/* nextP.style.cssText="cursor: pointer;"; */
-
+.linkComment {
+    "cursor: pointer;"
+}
 
 .linksDiv a {
     font-size: 110%;
@@ -10,7 +8,8 @@
 }
 
 .linksDiv hr {
-    border: 0.5px solid grey;}
+    border: 0.5px solid grey;
+}
 
 
 .linksDiv {

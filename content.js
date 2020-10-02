@@ -1,7 +1,7 @@
 browser.runtime.onMessage.addListener(request => {
     toggle();
     return Promise.resolve({
-        response: "Msg from content script"
+        response: "Msg from content script."
     });
 });
 
@@ -20,12 +20,10 @@ function toggle() {
 
 }
 
-// Setting this here was easier than using the CSS
-document.getElementById("hnmain").width = "70%";
-document.getElementById("hnmain").align = "left";
-
 const linksArray = createLinksArray();
 createLinksArrayElement(linksArray);
+toggle();
+
 
 function createLinksArray() {
     let linksArray = [];
