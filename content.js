@@ -78,17 +78,25 @@ function createLinksArrayElement(linksArray) {
         linkBlock.appendChild(linkHeader);
 
         let linkComment = document.createElement("p");
-        // TODO contract the comment to two lines or 100 chars or something.
+        linkComment.className = "linkComment";
 
         let linkCommentText = document.createTextNode(linksArray[i]["commentText"]);
         linkComment.appendChild(linkCommentText);
-        linkComment.style.cssText = "cursor: pointer;"; // TODO shift this to styles.css
         linkComment.onclick = function() {
             document.getElementById(parentCommentID).scrollIntoView();
         };
+
 
         linkBlock.appendChild(linkComment);
         linksDiv.appendChild(linkBlock);
     }
     document.body.appendChild(linksDiv);
 }
+
+
+const linksDivCommentTexts = document.getElementsByClassName('linkComment');
+
+
+Array.from(linksDivCommentTexts).forEach((el) => {
+    shear(el, 3, '<span>  ... (more)</span>');
+});

@@ -5,7 +5,7 @@
     "description": "hnlinks description",
     "content_scripts": [{
         "matches": ["https://news.ycombinator.com/item*"],
-        "js": ["content.js"],
+        "js": ["shear.js", "content.js"],
         "css": ["styles.css"]
     }],
     "permissions": [],
