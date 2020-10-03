@@ -10,4 +10,4 @@ A Firefox extension that adds a sidebar to comment threads on news.ycombinator.c
 <br>
 <br>
 
-![img](hnlinks-screenshot.png)
+![img](./assets/screencap.gif)
