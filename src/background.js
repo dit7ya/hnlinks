@@ -1,8 +1,8 @@
-function onError(error) {
+const onError = error => {
     console.error(`Error: ${error}`);
-}
+};
 
-function sendMessageToTabs(tabs) {
+const sendMessageToTabs = tabs => {
     for (let tab of tabs) {
         browser.tabs.sendMessage(
             tab.id,
@@ -12,7 +12,7 @@ function sendMessageToTabs(tabs) {
             // console.log(response.response);
         }).catch(onError);
     }
-}
+};
 
 browser.browserAction.onClicked.addListener(() => {
     browser.tabs.query({

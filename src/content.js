@@ -1,34 +1,67 @@
-browser.runtime.onMessage.addListener(request => {
+browser.runtime.onMessage.addListener(() => {
     toggle();
     return Promise.resolve({
-        response: "Msg from content script."
+        response: "Msg from content script.",
     });
 });
 
-function toggle() {
+const toggle = () => {
     if (document.getElementById("hnmain").align == "left") {
-
         document.getElementsByClassName("linksDiv")[0].style.display = "none";
         document.getElementById("hnmain").width = "85%";
         document.getElementById("hnmain").align = "center";
     } else {
-
         document.getElementsByClassName("linksDiv")[0].style.display = "initial";
         document.getElementById("hnmain").width = "70%";
         document.getElementById("hnmain").align = "left";
     }
+};
 
-}
+const fetchSearchResultsAndAppend = async (queryURL, previousStories) => {
+    try {
+        const response = await fetch(queryURL);
+        const data = await response.json();
+        if (await data["nbHits"]) {
 
-const linksArray = createLinksArray();
-createLinksArrayElement(linksArray);
-toggle();
+            let previousSection = document.createElement("details");
+            let summary = document.createElement("summary");
+            summary.innerText = "ELSEWHERE ON HN";
+            previousSection.appendChild(summary);
 
+            let linksList = document.createElement("li");
 
-function createLinksArray() {
+            for (let item of data["hits"]) {
+                // console.log(item);
+
+                let linkTitle = item["title"];
+                let numComments = item["num_comments"];
+                let points = item["points"];
+                let hnCommentsURL = "https://news.ycombinator.com/item?id=" + item["objectID"];
+
+                let urlElement = document.createElement("a");
+                urlElement.title = linkTitle;
+                urlElement.href = hnCommentsURL;
+
+                let urlText = document.createTextNode("[" + points +"P " + numComments + "C" + "]  " + linkTitle);
+                urlElement.appendChild(urlText);
+
+                let urlElementUl = document.createElement("ul");
+                urlElementUl.appendChild(urlElement);
+
+                previousSection.appendChild(urlElementUl);
+            }
+
+            previousStories.appendChild(previousSection);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+const createLinksArray = () => {
     let linksArray = [];
 
-    // Select all a elements inside commtext classes whose href attribute begins with "https"
+    // Select all elements inside commtext classes whose href attribute begins with "https"
     let links = document.querySelectorAll('.commtext a[href^="https"]');
 
     for (let i = 0, max = links.length; i < max; i++) {
@@ -46,9 +79,11 @@ function createLinksArray() {
         });
     }
 
-    linksArray.sort((a, b) => a.link.localeCompare(b.link));
+    linksArray.sort((a, b) => {
+        return a.link.localeCompare(b.link);
+    });
     return linksArray;
-}
+};
 
 function createLinksArrayElement(linksArray) {
     const linksDiv = document.createElement("div");
@@ -86,17 +121,30 @@ function createLinksArrayElement(linksArray) {
             document.getElementById(parentCommentID).scrollIntoView();
         };
 
-
         linkBlock.appendChild(linkComment);
+
+        let previousStories = document.createElement('div');
+        previousStories.className = "previousStories";
+
+        url = linksArray[i]['link'].split("#")[0];
+        queryURL = "http://hn.algolia.com/api/v1/search?query=" + url + "&tags=story&restrictSearchableAttributes=url";
+        // console.log(queryURL);
+
+        // TODO this only retrives the first 20 search results
+
+        fetchSearchResultsAndAppend(queryURL, previousStories);
+
         linksDiv.appendChild(linkBlock);
+        linksDiv.appendChild(previousStories);
     }
     document.body.appendChild(linksDiv);
 }
 
-
-const linksDivCommentTexts = document.getElementsByClassName('linkComment');
-
+const linksArray = createLinksArray();
+createLinksArrayElement(linksArray);
+toggle();
+const linksDivCommentTexts = document.getElementsByClassName("linkComment");
 
 Array.from(linksDivCommentTexts).forEach((el) => {
-    shear(el, 3, '<span>  ... (more)</span>');
+    shear(el, 3, "<span>  ... (more)</span>");
 });

@@ -1,5 +1,6 @@
 .linkComment {
     cursor: pointer;
+    margin-bottom: 5px;
 }
 
 .linksDiv a {
@@ -21,10 +22,33 @@
     font-size: 0.7rem;
     overflow: auto;
     /* overflow-x: hidden; */
-    background-color: white;
+    /* background-color: white; */
+    background-color: #f6f6ef;
     width: 27%;
     height: max-content;
     border: 2px solid #ff6600;
     margin: 0.5rem;
+    /* margin-bottom: 3px; */
     padding: 0.5rem;
+}
+
+.previousStories {
+    font-size: 0.6rem;
+}
+
+.previousStories a {
+    font-size: 0.6rem;
+    margin-bottom: 10px;
+}
+
+.previousStories li:not(:last-child){
+    margin: 1px;
+}
+
+.previousStories ul {
+    margin: 3px;
+}
+
+summary {
+    /* TODO */
 }

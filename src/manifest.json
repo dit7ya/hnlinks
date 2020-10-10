@@ -8,7 +8,9 @@
         "js": ["shear.js", "content.js"],
         "css": ["styles.css"]
     }],
-    "permissions": [],
+    "permissions": [
+        "*://hn.algolia.com/api/*"
+    ],
     "icons": {
         "64": "icon.png"
     },
