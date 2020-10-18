@@ -1,19 +1,22 @@
 browser.runtime.onMessage.addListener(() => {
-    toggle();
+    toggleSidebar();
     return Promise.resolve({
         response: "Msg from content script.",
     });
 });
 
-const toggle = () => {
-    if (document.getElementById("hnmain").align == "left") {
-        document.getElementsByClassName("linksDiv")[0].style.display = "none";
-        document.getElementById("hnmain").width = "85%";
-        document.getElementById("hnmain").align = "center";
+const toggleSidebar = () => {
+
+    const hnmain = document.getElementById("hnmain");
+    const linksDiv = document.getElementsByClassName("linksDiv")[0];
+    if (hnmain.align == "left") {
+        linksDiv.style.display = "none";
+        hnmain.width = "85%";
+        hnmain.align = "center";
     } else {
-        document.getElementsByClassName("linksDiv")[0].style.display = "initial";
-        document.getElementById("hnmain").width = "70%";
-        document.getElementById("hnmain").align = "left";
+        linksDiv.style.display = "initial";
+        hnmain.width = "70%";
+        hnmain.align = "left";
     }
 };
 
@@ -31,7 +34,6 @@ const fetchSearchResultsAndAppend = async (queryURL, previousStories) => {
             let linksList = document.createElement("li");
 
             for (let item of data["hits"]) {
-                // console.log(item);
 
                 let linkTitle = item["title"];
                 let numComments = item["num_comments"];
@@ -41,6 +43,7 @@ const fetchSearchResultsAndAppend = async (queryURL, previousStories) => {
                 let urlElement = document.createElement("a");
                 urlElement.title = linkTitle;
                 urlElement.href = hnCommentsURL;
+                urlElement.target = "_blank";
 
                 let urlText = document.createTextNode("[" + points +"P " + numComments + "C" + "]  " + linkTitle);
                 urlElement.appendChild(urlText);
@@ -130,7 +133,7 @@ function createLinksArrayElement(linksArray) {
         queryURL = "http://hn.algolia.com/api/v1/search?query=" + url + "&tags=story&restrictSearchableAttributes=url";
         // console.log(queryURL);
 
-        // TODO this only retrives the first 20 search results
+        // FIXME this only retrives the first 20 search results
 
         fetchSearchResultsAndAppend(queryURL, previousStories);
 
@@ -142,7 +145,7 @@ function createLinksArrayElement(linksArray) {
 
 const linksArray = createLinksArray();
 createLinksArrayElement(linksArray);
-toggle();
+toggleSidebar();
 const linksDivCommentTexts = document.getElementsByClassName("linkComment");
 
 Array.from(linksDivCommentTexts).forEach((el) => {
