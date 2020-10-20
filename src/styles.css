@@ -1,6 +1,7 @@
 .linkComment {
     cursor: pointer;
     margin-bottom: 5px;
+    color: #575757;
 }
 
 .linksDiv a {
@@ -27,28 +28,56 @@
     width: 27%;
     height: max-content;
     border: 2px solid #ff6600;
-    margin: 0.5rem;
-    /* margin-bottom: 3px; */
+    margin: 8px;
     padding: 0.5rem;
 }
 
 .previousStories {
     font-size: 0.6rem;
+    /* background-color: #d5efc5; */
 }
 
 .previousStories a {
     font-size: 0.6rem;
-    margin-bottom: 10px;
+    color: #717171;
 }
 
 .previousStories li:not(:last-child){
     margin: 1px;
 }
 
-.previousStories ul {
+.previousStories p {
     margin: 3px;
+    margin-left: 10px;
 }
+
 
 summary {
     /* TODO */
 }
+
+.urlPointsAndComments {
+    padding-right: 1em;
+}
+
+/* .container { */
+/*     display: flex; */
+/*     flex-direction: row; */
+/*     /\* overflow-y: auto; *\/ */
+/* } */
+
+/* #hnmain { */
+/*     flex: 0 0 70%; */
+/*     width: unset; */
+/*     /\* height: 100vh; *\/ */
+/*     overflow-y: auto; */
+/* } */
+
+/* body { */
+/*     overflow-y: hidden; */
+/* } */
+
+/* body { */
+/*     display: grid; */
+/*     grid-column-gap: 20px; */
+/* } */

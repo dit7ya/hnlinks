@@ -5,6 +5,7 @@ browser.runtime.onMessage.addListener(() => {
     });
 });
 
+
 const toggleSidebar = () => {
 
     const hnmain = document.getElementById("hnmain");
@@ -28,7 +29,7 @@ const fetchSearchResultsAndAppend = async (queryURL, previousStories) => {
 
             let previousSection = document.createElement("details");
             let summary = document.createElement("summary");
-            summary.innerText = "ELSEWHERE ON HN";
+            summary.innerHTML = "<em> Elsewhere on HN </em>";
             previousSection.appendChild(summary);
 
             let linksList = document.createElement("li");
@@ -45,13 +46,22 @@ const fetchSearchResultsAndAppend = async (queryURL, previousStories) => {
                 urlElement.href = hnCommentsURL;
                 urlElement.target = "_blank";
 
-                let urlText = document.createTextNode("[" + points +"P " + numComments + "C" + "]  " + linkTitle);
-                urlElement.appendChild(urlText);
+                let urlPointsAndComments = document.createElement("text");
+                urlPointsAndComments.textContent = "⬆" + points + "  💬" + numComments + "  ";
+                // urlPointsAndComments.appendChild(document.createTextNode("⬆" + points + "  💬" + numComments + "  "));
+                urlPointsAndComments.className = "urlPointsAndComments";
 
-                let urlElementUl = document.createElement("ul");
-                urlElementUl.appendChild(urlElement);
+                urlElement.textContent = linkTitle;
 
-                previousSection.appendChild(urlElementUl);
+                // let urlText = document.createTextNode(linkTitle);
+                // urlElement.appendChild(urlText);
+
+                let urlElementP = document.createElement("p");
+
+                urlElementP.appendChild(urlPointsAndComments);
+                urlElementP.appendChild(urlElement);
+
+                previousSection.appendChild(urlElementP);
             }
 
             previousStories.appendChild(previousSection);
@@ -82,6 +92,7 @@ const createLinksArray = () => {
         });
     }
 
+    // Sort the Array so that same domains are grouped together.
     linksArray.sort((a, b) => {
         return a.link.localeCompare(b.link);
     });
@@ -92,12 +103,14 @@ function createLinksArrayElement(linksArray) {
     const linksDiv = document.createElement("div");
     linksDiv.className = "linksDiv";
 
+    // The instructions Header
     const instructionsText = document.createTextNode(
-        "Click on a comment text to focus on that comment in the thread. "
+        "Click on a comment text to focus on that comment in the thread. If a link has been posted as a HN story before, click on 'Elsewhere on HN' to see those."
     );
 
     linksDiv.appendChild(instructionsText);
 
+    // One horizontal separator
     const hr = document.createElement("hr");
     linksDiv.appendChild(hr);
 
@@ -106,9 +119,10 @@ function createLinksArrayElement(linksArray) {
         let parentCommentID = linksArray[i]["idOfClosestParent"];
 
         let linkHeader = document.createElement("a");
-        let linkText = document.createTextNode(linksArray[i]["link"]);
+        // let linkText = document.createTextNode(linksArray[i]["link"]);
 
-        linkHeader.appendChild(linkText);
+        linkHeader.textContent = linksArray[i]["link"];
+        // linkHeader.appendChild(linkText);
         linkHeader.title = linksArray[i]["link"];
         linkHeader.href = linksArray[i]["link"];
         linkHeader.target = "_blank";
@@ -117,9 +131,10 @@ function createLinksArrayElement(linksArray) {
 
         let linkComment = document.createElement("p");
         linkComment.className = "linkComment";
+        linkComment.textContent = linksArray[i]["commentText"];
 
-        let linkCommentText = document.createTextNode(linksArray[i]["commentText"]);
-        linkComment.appendChild(linkCommentText);
+        // let linkCommentText = document.createTextNode(linksArray[i]["commentText"]);
+        // linkComment.appendChild(linkCommentText);
         linkComment.onclick = function() {
             document.getElementById(parentCommentID).scrollIntoView();
         };
@@ -133,8 +148,7 @@ function createLinksArrayElement(linksArray) {
         queryURL = "http://hn.algolia.com/api/v1/search?query=" + url + "&tags=story&restrictSearchableAttributes=url";
         // console.log(queryURL);
 
-        // FIXME this only retrives the first 20 search results
-
+        // FIXME this only retrives the first 20 search results (which is fine for the time being, I think)
         fetchSearchResultsAndAppend(queryURL, previousStories);
 
         linksDiv.appendChild(linkBlock);
@@ -146,8 +160,11 @@ function createLinksArrayElement(linksArray) {
 const linksArray = createLinksArray();
 createLinksArrayElement(linksArray);
 toggleSidebar();
-const linksDivCommentTexts = document.getElementsByClassName("linkComment");
 
+
+// Ellipsify the comment texts to three lines
+
+const linksDivCommentTexts = document.getElementsByClassName("linkComment");
 Array.from(linksDivCommentTexts).forEach((el) => {
     shear(el, 3, "<span>  ... (more)</span>");
 });
