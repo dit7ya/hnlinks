@@ -164,7 +164,12 @@ toggleSidebar();
 
 // Ellipsify the comment texts to three lines
 
-const linksDivCommentTexts = document.getElementsByClassName("linkComment");
-Array.from(linksDivCommentTexts).forEach((el) => {
-    shear(el, 3, "<span>  ... (more)</span>");
+$readMoreJS.init({
+    target: '.linkComment',
+    numOfWords: 40,            // Number of words to initially display.
+    toggle: true,              // If true, user can toggle between 'read more' and 'read less'
+    moreLink: 'more...', // The text of 'Read more' link.
+    lessLink: 'less',      // The text of 'Read less' link.
+    linkClass: 'rm-link',       // The class given to the read more link.
+    containerClass: 'rm-container' // The class given to the div container of the read more link.
 });

@@ -60,24 +60,7 @@ summary {
     padding-right: 1em;
 }
 
-/* .container { */
-/*     display: flex; */
-/*     flex-direction: row; */
-/*     /\* overflow-y: auto; *\/ */
-/* } */
-
-/* #hnmain { */
-/*     flex: 0 0 70%; */
-/*     width: unset; */
-/*     /\* height: 100vh; *\/ */
-/*     overflow-y: auto; */
-/* } */
-
-/* body { */
-/*     overflow-y: hidden; */
-/* } */
-
-/* body { */
-/*     display: grid; */
-/*     grid-column-gap: 20px; */
-/* } */
+.rm-container {
+    font-size: 90%;
+    margin-top: -7px;
+}
