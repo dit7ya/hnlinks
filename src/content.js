@@ -91,10 +91,16 @@ const createLinksArray = () => {
 
   for (let i = 0, max = links.length; i < max; i++) {
     idOfClosestParent = links[i].closest(".comtr").id;
-    textOfComment = document
-      .getElementById(idOfClosestParent)
-      .getElementsByClassName("commtext")[0]
-      .innerText.slice(0, -7); // slicing to get rid of the 'reply' text
+
+
+      textOfComment = document
+        .getElementById(idOfClosestParent)
+          .getElementsByClassName("commtext")[0].innerText;
+
+      // If it is a multiline comment the innerText contains "reply". We remove that.
+      if (textOfComment.endsWith("reply")) {
+          textOfComment = textOfComment.slice(0, -7);
+    }
 
     linksArray.push({
       link: links[i].href,
