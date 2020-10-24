@@ -1,6 +1,6 @@
 .linkComment {
     cursor: pointer;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
     color: #575757;
 }
 
@@ -20,11 +20,11 @@
     right: 0;
     bottom: 0;
     font-family: sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.67rem;
     overflow: auto;
     /* overflow-x: hidden; */
     /* background-color: white; */
-    background-color: #f6f6ef;
+    background-color: #f6f6efbe;
     width: 27%;
     height: max-content;
     border: 2px solid #ff6600;
@@ -35,11 +35,14 @@
 .previousStories {
     font-size: 0.6rem;
     /* background-color: #d5efc5; */
+    margin: 10px;
 }
 
 .previousStories a {
     font-size: 0.6rem;
     color: #717171;
+    flex: 5;
+    margin-right 5px;
 }
 
 .previousStories li:not(:last-child){
@@ -49,6 +52,7 @@
 .previousStories p {
     margin: 3px;
     margin-left: 10px;
+    display: flex;
 }
 
 
@@ -56,11 +60,34 @@ summary {
     /* TODO */
 }
 
-.urlPointsAndComments {
-    padding-right: 1em;
+
+.urlPoints {
+    flex: 1;
+    text-align: right;
 }
+
+.urlComments {
+    flex: 1;
+    text-align: right;
+    /* background-color: #ff6600; */
+}
+
+/* .urlPoints span { */
+/*     background-color: #ff66006a; */
+/*     border-radius: 2px; */
+/* } */
+
+
+
 
 .rm-container {
     font-size: 90%;
-    margin-top: -7px;
+    margin-top: -12px;
 }
+
+
+/* .previousStories p { */
+/*     display: table; */
+/*     justify-content: space-between; */
+/* } */
+

@@ -19,6 +19,8 @@ const toggleSidebar = () => {
   }
 };
 
+
+
 const fetchSearchResultsAndAppend = async (queryURL, previousStories) => {
   try {
     const response = await fetch(queryURL);
@@ -43,11 +45,21 @@ const fetchSearchResultsAndAppend = async (queryURL, previousStories) => {
         urlElement.href = hnCommentsURL;
         urlElement.target = "_blank";
 
-        let urlPointsAndComments = document.createElement("text");
-        urlPointsAndComments.textContent =
-          "⬆" + points + "  💬" + numComments + "  ";
-        // urlPointsAndComments.appendChild(document.createTextNode("⬆" + points + "  💬" + numComments + "  "));
-        urlPointsAndComments.className = "urlPointsAndComments";
+        let urlPoints = document.createElement("text");
+        urlPoints.textContent =
+          "▲ " + points;
+
+        // urlPoints.innerHTML =
+            // "<span>▲ " + points + "</span>";
+
+        urlPoints.className = "urlPoints";
+
+
+        let urlComments = document.createElement("text");
+        urlComments.textContent =
+            "🗩 " + numComments;
+
+        urlComments.className = "urlComments";
 
         urlElement.textContent = linkTitle;
 
@@ -56,8 +68,9 @@ const fetchSearchResultsAndAppend = async (queryURL, previousStories) => {
 
         let urlElementP = document.createElement("p");
 
-        urlElementP.appendChild(urlPointsAndComments);
         urlElementP.appendChild(urlElement);
+        urlElementP.appendChild(urlPoints);
+        urlElementP.appendChild(urlComments);
 
         previousSection.appendChild(urlElementP);
       }
