@@ -40,9 +40,11 @@
 
 .previousStories a {
     font-size: 0.6rem;
-    color: #717171;
+    color: #353535;
     flex: 5;
-    margin-right 5px;
+    margin-right: 5px;
+    /* line-height: 1.3em; */
+    /* margin-bottom: 5px; */
 }
 
 .previousStories li:not(:last-child){
@@ -58,6 +60,7 @@
 
 summary {
     /* TODO */
+    /* color: #222222; */
 }
 
 
@@ -91,3 +94,7 @@ summary {
 /*     justify-content: space-between; */
 /* } */
 
+
+.urlElement a{
+    color: #353535;
+}

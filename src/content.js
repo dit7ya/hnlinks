@@ -44,6 +44,7 @@ const fetchSearchResultsAndAppend = async (queryURL, previousStories) => {
         urlElement.title = linkTitle;
         urlElement.href = hnCommentsURL;
         urlElement.target = "_blank";
+        urlElement.className = "urlElement";
 
         let urlPoints = document.createElement("text");
         urlPoints.textContent =
