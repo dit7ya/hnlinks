@@ -42,7 +42,7 @@
     font-size: 0.6rem;
     color: #353535;
     flex: 5;
-    margin-right: 5px;
+    /* margin-right: 5px; */
     /* line-height: 1.3em; */
     /* margin-bottom: 5px; */
 }
@@ -60,7 +60,7 @@
 
 summary {
     /* TODO */
-    /* color: #222222; */
+    background-color: grey;
 }
 
 
@@ -74,6 +74,8 @@ summary {
     text-align: right;
     /* background-color: #ff6600; */
 }
+
+
 
 /* .urlPoints span { */
 /*     background-color: #ff66006a; */
