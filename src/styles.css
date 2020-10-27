@@ -32,9 +32,17 @@
     padding: 0.5rem;
 }
 
+.previousSection {
+    background-color: #dcdcdcdc;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin : 10px;
+}
+
+
 .previousStories {
     font-size: 0.6rem;
-    /* background-color: #d5efc5; */
     margin: 10px;
 }
 
@@ -60,7 +68,6 @@
 
 summary {
     /* TODO */
-    background-color: grey;
 }
 
 
