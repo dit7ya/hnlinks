@@ -37,7 +37,7 @@
     border-radius: 5px;
     padding-left: 5px;
     padding-right: 5px;
-    margin : 10px;
+    /* margin : 10px; */
 }
 
 
@@ -61,7 +61,7 @@
 
 .previousStories p {
     margin: 3px;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     display: flex;
 }
 

@@ -87,8 +87,9 @@ const fetchSearchResultsAndAppend = async (queryURL, previousStories) => {
 const createLinksArray = () => {
     let linksArray = [];
 
-    // Select all elements inside commtext classes whose href attribute begins with "https"
-    let links = document.querySelectorAll('.commtext a[href^="https"]');
+    // Select all elements inside commtext classes whose href attribute begins with "http"
+    // This selects for both http and https links
+    let links = document.querySelectorAll('.commtext a[href^="http"]');
 
     for (let i = 0, max = links.length; i < max; i++) {
         idOfClosestParent = links[i].closest(".comtr").id;
