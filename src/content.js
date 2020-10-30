@@ -19,6 +19,45 @@ const toggleSidebar = () => {
     }
 };
 
+const openCollapsed = (commID) => {
+    // console.log(commID);
+    // console.log("Hello");
+
+    if (document.getElementById(commID).classList.contains("coll")) {
+        document.getElementById(commID).getElementsByClassName("togg")[0].click();
+        // document.getElementById(24939449).getElementsByClassName("togg")[0].click();
+        console.log("opening " + commID);
+    }
+};
+
+const openParentCommentsTillRoot = (commID) => {
+    // indentation of the given comment
+    indWidth = document
+        .getElementById(commID)
+        .getElementsByClassName("ind")[0]
+        .getElementsByTagName("img")[0].width;
+
+    currentCommID = commID;
+    // console.log('Hello');
+
+    while (document.getElementById
+           (currentCommID).getElementsByClassName("ind")[0].getElementsByTagName("img")[0].width > 0) {
+        // open the current comment
+        openCollapsed(currentCommID);
+
+        // find the prev comm and set that for currentCommID
+        // TODO ignore prev comment if it is on the same level
+        prevComm = document.getElementById(currentCommID).previousElementSibling;
+        currentCommID = prevComm.id;
+
+    }
+
+    // open the root comment (indWidth = 0)
+    openCollapsed(currentCommID);
+};
+
+
+
 
 
 const fetchSearchResultsAndAppend = async (queryURL, previousStories) => {
@@ -48,18 +87,15 @@ const fetchSearchResultsAndAppend = async (queryURL, previousStories) => {
                 urlElement.className = "urlElement";
 
                 let urlPoints = document.createElement("text");
-                urlPoints.textContent =
-                    "▲ " + points;
+                urlPoints.textContent = "▲ " + points;
 
                 // urlPoints.innerHTML =
                 // "<span>▲ " + points + "</span>";
 
                 urlPoints.className = "urlPoints";
 
-
                 let urlComments = document.createElement("text");
-                urlComments.textContent =
-                    "🗩 " + numComments;
+                urlComments.textContent = "🗩 " + numComments;
 
                 urlComments.className = "urlComments";
 
@@ -85,6 +121,7 @@ const fetchSearchResultsAndAppend = async (queryURL, previousStories) => {
 };
 
 const createLinksArray = () => {
+    // TODO change name to object THINK AGAIN
     let linksArray = [];
 
     // Select all elements inside commtext classes whose href attribute begins with "http"
@@ -93,7 +130,6 @@ const createLinksArray = () => {
 
     for (let i = 0, max = links.length; i < max; i++) {
         idOfClosestParent = links[i].closest(".comtr").id;
-
 
         textOfComment = document
             .getElementById(idOfClosestParent)
@@ -156,6 +192,7 @@ function createLinksArrayElement(linksArray) {
         // let linkCommentText = document.createTextNode(linksArray[i]["commentText"]);
         // linkComment.appendChild(linkCommentText);
         linkComment.onclick = function() {
+            openParentCommentsTillRoot(parentCommentID);
             document.getElementById(parentCommentID).scrollIntoView();
         };
 
@@ -171,10 +208,10 @@ function createLinksArrayElement(linksArray) {
             "&tags=story&restrictSearchableAttributes=url";
         // console.log(queryURL);
 
-        // FIXME this only retrives the first 20 search results (which is fine for the time being, I think)
-        fetchSearchResultsAndAppend(queryURL, previousStories);
+        // FIXME this only retrives the first 20 search results (which is fine for the time being, I think) fetchSearchResultsAndAppend(queryURL, previousStories);
 
         linksDiv.appendChild(linkBlock);
+        // TODO Check whether to append to linkBlock instead
         linksDiv.appendChild(previousStories);
     }
     document.body.appendChild(linksDiv);
