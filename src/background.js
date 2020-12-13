@@ -1,22 +1,22 @@
 const onError = error => {
-    console.error(`Error: ${error}`);
+  console.error(`Error: ${error}`);
 };
 
 const sendMessageToTabs = tabs => {
-    for (let tab of tabs) {
-        browser.tabs.sendMessage(
-            tab.id,
-            {greeting: "Hi from background script"}
-        ).then(response => {
-            // console.log("Message from the content script:");
-            // console.log(response.response);
-        }).catch(onError);
-    }
+  for (const tab of tabs) {
+    browser.tabs.sendMessage(
+      tab.id,
+      { greeting: 'Hi from background script' }
+    ).then(response => {
+      // console.log("Message from the content script:");
+      // console.log(response.response);
+    }).catch(onError);
+  }
 };
 
 browser.browserAction.onClicked.addListener(() => {
-    browser.tabs.query({
-        currentWindow: true,
-        active: true
-    }).then(sendMessageToTabs).catch(onError);
+  browser.tabs.query({
+    currentWindow: true,
+    active: true
+  }).then(sendMessageToTabs).catch(onError);
 });

@@ -6,20 +6,20 @@
  * @author George Raptis | http://georap.gr
  */
 (function (win, doc, undef) {
-  "use strict";
+  'use strict';
 
   /**
    * @desc this object holds all functions
    */
-  var RM = {};
+  const RM = {};
 
   /* ============================== */
   /*             HELPERS            */
   /* ============================== */
   RM.helpers = {
     extendObj: function () {
-      for (var i = 1, l = arguments.length; i < l; i++) {
-        for (var key in arguments[i]) {
+      for (let i = 1, l = arguments.length; i < l; i++) {
+        for (const key in arguments[i]) {
           if (arguments[i].hasOwnProperty(key)) {
             if (
               arguments[i][key] &&
@@ -35,7 +35,7 @@
         }
       }
       return arguments[0];
-    },
+    }
   };
 
   /* ============================== */
@@ -49,36 +49,36 @@
 
   // Rturn string starting from first word untill number specified.
   RM.generateTrimmed = function (str, wordsNum) {
-    return str.split(/\s+/).slice(0, wordsNum).join(" ") + "...";
+    return str.split(/\s+/).slice(0, wordsNum).join(' ') + '...';
   };
 
   // Plugin Initialization
   RM.init = function (options) {
-    var defaults = {
-      target: "",
+    const defaults = {
+      target: '',
       numOfWords: 50,
       toggle: true,
-      moreLink: "read more...",
-      lessLink: "read less",
-      linkClass: "rm-link",
-      containerClass: false,
+      moreLink: 'read more...',
+      lessLink: 'read less',
+      linkClass: 'rm-link',
+      containerClass: false
     };
     options = RM.helpers.extendObj({}, defaults, options);
 
-    var target = doc.querySelectorAll(options.target), // Get the node list of target elements specified by the user.
-      targetLen = target.length, // Length of the targets node list.
-      targetContent, // The initial text that is contained in the target element.
-      trimmedTargetContent, // The final (trimmed) text.
-      targetContentWords, // The number of words the initial text has.
-      initArr = [], // Array to hold the initial text of each target element.
-      trimmedArr = [], // Array to hold the final (trimmed) text of each target element.
-      i,
-      j,
-      l,
-      moreContainer,
-      rmLink,
-      moreLinkID,
-      index;
+    const target = doc.querySelectorAll(options.target); // Get the node list of target elements specified by the user.
+    const targetLen = target.length; // Length of the targets node list.
+    let targetContent; // The initial text that is contained in the target element.
+    let trimmedTargetContent; // The final (trimmed) text.
+    let targetContentWords; // The number of words the initial text has.
+    const initArr = []; // Array to hold the initial text of each target element.
+    const trimmedArr = []; // Array to hold the final (trimmed) text of each target element.
+    let i;
+    let j;
+    let l;
+    let moreContainer;
+    let rmLink;
+    let moreLinkID;
+    let index;
 
     // Loop through all target elements
     for (i = 0; i < targetLen; i++) {
@@ -97,7 +97,7 @@
       if (options.numOfWords < targetContentWords - 1) {
         target[i].innerHTML = trimmedArr[i]; // Populate the target element with the trimmed version of text.
 
-        moreContainer = doc.createElement("div"); // Create a div element to hold the More/Less link.
+        moreContainer = doc.createElement('div'); // Create a div element to hold the More/Less link.
         if (options.containerClass) {
           moreContainer.className = options.containerClass;
         }
@@ -111,7 +111,7 @@
           '"' +
           ' style="cursor:pointer;" data-readmore="anchor">' +
           options.moreLink +
-          "</a>";
+          '</a>';
         target[i].parentNode.insertBefore(moreContainer, target[i].nextSibling); // Insert the More/Less link after the target element.
       }
     }
@@ -120,22 +120,22 @@
     // Loop through all links and attach event listeners.
     for (j = 0, l = rmLink.length; j < l; j++) {
       rmLink[j].onclick = function () {
-        moreLinkID = this.getAttribute("id"); // Get each link's unique identifier.
-        index = moreLinkID.split("_")[1]; // Extract index number from each link's 'id'.
+        moreLinkID = this.getAttribute('id'); // Get each link's unique identifier.
+        index = moreLinkID.split('_')[1]; // Extract index number from each link's 'id'.
 
         // if (!helpers.classList.contains(this, 'less')) {
-        if (this.getAttribute("data-clicked") !== "true") {
+        if (this.getAttribute('data-clicked') !== 'true') {
           target[index].innerHTML = initArr[index];
           if (options.toggle !== false) {
             this.innerHTML = options.lessLink;
-            this.setAttribute("data-clicked", true);
+            this.setAttribute('data-clicked', true);
           } else {
-            this.innerHTML = "";
+            this.innerHTML = '';
           }
         } else {
           target[index].innerHTML = trimmedArr[index];
           this.innerHTML = options.moreLink;
-          this.setAttribute("data-clicked", false);
+          this.setAttribute('data-clicked', false);
         }
       };
     }
