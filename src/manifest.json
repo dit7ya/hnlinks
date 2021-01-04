@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
     "name": "hnlinks",
-    "version": "0.3.1",
-    "description": "hnlinks description",
+    "version": "0.4.0",
+    "description": "Browse links in HackerNews threads, fast!",
     "content_scripts": [{
         "matches": ["https://news.ycombinator.com/item*"],
         "js": ["readmore.js", "content.js"],
