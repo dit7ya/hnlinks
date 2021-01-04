@@ -16,6 +16,7 @@ const toggleSidebar = () => {
     linksDiv.style.display = 'initial';
     hnmain.width = '70%';
     hnmain.align = 'left';
+    hnmain.style.minWidth = 0;
   }
 };
 
