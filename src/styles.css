@@ -1,109 +1,99 @@
 .linkComment {
-    cursor: pointer;
-    /* margin-bottom: 5px; */
-    color: #575757;
+  cursor: pointer;
+  /* margin-bottom: 5px; */
+  color: #575757;
 }
 
 .linksDiv a {
-    font-size: 110%;
-    text-decoration: underline solid black;
+  font-size: 110%;
+  text-decoration: underline solid black;
 }
 
 .linksDiv hr {
-    border: 0.5px solid grey;
+  border: 0.5px solid grey;
 }
 
-
 .linksDiv {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    font-family: sans-serif;
-    font-size: 0.67rem;
-    overflow: auto;
-    /* overflow-x: hidden; */
-    /* background-color: white; */
-    background-color: #f6f6efbe;
-    width: 27%;
-    height: max-content;
-    border: 2px solid #ff6600;
-    margin: 8px;
-    padding: 0.5rem;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  font-family: sans-serif;
+  font-size: 0.67rem;
+  /* overflow: auto; */
+  overflow-y: scroll;
+  overflow-x: hidden;
+  /* background-color: white; */
+  background-color: #f6f6efbe;
+  width: 27%;
+  /* height: fit-content; */
+  border: 2px solid #ff6600;
+  margin: 8px;
+  padding: 0.5rem;
 }
 
 .previousSection {
-    background-color: #dcdcdcdc;
-    border-radius: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    /* margin : 10px; */
+  background-color: #dcdcdcdc;
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  /* margin : 10px; */
 }
 
-
 .previousStories {
-    font-size: 0.6rem;
-    margin: 10px;
+  font-size: 0.6rem;
+  margin: 10px;
 }
 
 .previousStories a {
-    font-size: 0.6rem;
-    color: #353535;
-    flex: 5;
-    /* margin-right: 5px; */
-    /* line-height: 1.3em; */
-    /* margin-bottom: 5px; */
+  font-size: 0.6rem;
+  color: #353535;
+  flex: 5;
+  /* margin-right: 5px; */
+  /* line-height: 1.3em; */
+  /* margin-bottom: 5px; */
 }
 
-.previousStories li:not(:last-child){
-    margin: 1px;
+.previousStories li:not(:last-child) {
+  margin: 1px;
 }
 
 .previousStories p {
-    margin: 3px;
-    /* margin-left: 10px; */
-    display: flex;
+  margin: 3px;
+  /* margin-left: 10px; */
+  display: flex;
 }
-
 
 summary {
-    /* TODO */
+  /* TODO */
 }
 
-
 .urlPoints {
-    flex: 1;
-    text-align: right;
+  flex: 1;
+  text-align: right;
 }
 
 .urlComments {
-    flex: 1;
-    text-align: right;
-    /* background-color: #ff6600; */
+  flex: 1;
+  text-align: right;
+  /* background-color: #ff6600; */
 }
-
-
 
 /* .urlPoints span { */
 /*     background-color: #ff66006a; */
 /*     border-radius: 2px; */
 /* } */
 
-
-
-
 .rm-container {
-    font-size: 90%;
-    margin-top: -12px;
+  font-size: 90%;
+  margin-top: -12px;
 }
-
 
 /* .previousStories p { */
 /*     display: table; */
 /*     justify-content: space-between; */
 /* } */
 
-
-.urlElement a{
-    color: #353535;
+.urlElement a {
+  color: #353535;
 }
