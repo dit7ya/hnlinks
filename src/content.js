@@ -5,10 +5,10 @@ browser.runtime.onMessage.addListener(() => {
   });
 });
 
-const toggleSidebar = () => {
+const toggleSidebar = (length) => {
   const hnmain = document.getElementById('hnmain');
   const linksDiv = document.getElementsByClassName('linksDiv')[0];
-  if (hnmain.align === 'left') {
+  if (length === undefined || length === 0 || hnmain.align === 'left') {
     linksDiv.style.display = 'none';
     hnmain.width = '85%';
     hnmain.align = 'center';
@@ -215,7 +215,7 @@ function createLinksArrayElement (linksArray) {
 
 const linksArray = createLinksArray();
 createLinksArrayElement(linksArray);
-toggleSidebar();
+toggleSidebar(linksArray.length);
 
 // Ellipsify the comment texts to three lines
 
