@@ -20,7 +20,7 @@
     extendObj: function () {
       for (let i = 1, l = arguments.length; i < l; i++) {
         for (const key in arguments[i]) {
-          if (arguments[i].hasOwnProperty(key)) {
+          if (Object.prototype.hasOwnProperty.call(arguments[i], key)) {
             if (
               arguments[i][key] &&
               arguments[i][key].constructor &&
